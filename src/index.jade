@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title Presentation
+    link(rel="stylesheet" href="components/reveal.js/css/reveal.css")
+    link(rel="stylesheet" href="components/reveal.js/css/theme/serif.css")
+    link(rel="stylesheet" href="components/reveal.js/lib/css/zenburn.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+    link(rel="stylesheet" href="css/main.css")
+  body
+    .reveal
+      .slides
+        include ./slides.jade
+  
+ 
+    script(src="components/headjs/dist/1.0.0/head.min.js")
+    script(src="components/reveal.js/js/reveal.js")
+    script.
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        dependencies: [
+          { src: 'components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'components/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'components/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+

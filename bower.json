@@ -1,0 +1,26 @@
+{
+  "name": "revealjs-starter",
+  "description": "Starter boilerplate for RevealJS",
+  "main": "index.js",
+  "authors": [
+    "Daniel Perez <tuvistavie@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "revealjs",
+    "boilerplate",
+    "starter"
+  ],
+  "moduleType": [],
+  "homepage": "https://github.com/tuvistavie/revealjs-starter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "^3.2.0"
+  }
+}

@@ -1,0 +1,54 @@
+section
+  h1 Daniel Perez
+  h3
+    | CTO @ 
+    a(href="http://claudetech.com" target="_blank") ClaudeTech
+  h3
+    i.fa.fa-github.fa-margin
+    a(href="https://github.com/tuvistavie" target="_blank") tuvistavie
+  h3
+    a(href="http://tuvistavie.com/tokyo.ex" target="_blank") http://tuvistavie.com/tokyo.ex
+
+section
+  h3 Elixir
+  ul
+    li Using in production for ~3 months
+    li
+      | Maintaining 
+      a(href="https://github.com/HashNuke/hound") Hound (browser automation library)
+    li Loosely trying to help a little in the core
+
+section
+  h3 Elixir 1.3
+  ul
+    li Deprecation of imperative assignment
+    li <code>with</code> improvements
+    li Date datatypes  
+    li Plenty of other stuff
+
+section
+  h3 How to try it
+  h4 Normal Install
+  pre: code(lang="shell")
+    | git clone https://github.com/elixir-lang/elixir.git
+    | cd elixir
+    | make
+    | ./bin/iex
+
+  h4 With <a href="https://github.com/taylor/kiex">kiex</a>
+  
+  pre: code(lang="shell")
+    | kiex install master
+    | source $HOME/.kiex/elixirs/elixir-master.env
+    | iex
+section
+  section
+    h3 Deprecation of imperative assignments
+    p This code will now give a warning
+    pre: code(lang="elixir")
+      include ./snippets/imperative_assignement.exs
+    p we can refactor
+    pre: code(lang="elixir")
+      include ./snippets/functional_assignement.exs
+  section
+    h3 A helper each time??

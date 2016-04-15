@@ -1,0 +1,33 @@
+{
+  "name": "reveal-starter",
+  "version": "0.1.0",
+  "description": "Starter boilerplate for RevealJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuvistavie/revealjs-starter.git"
+  },
+  "keywords": [
+    "revealjs",
+    "boilerplate",
+    "starter"
+  ],
+  "author": "Daniel Perez <tuvistavie@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuvistavie/revealjs-starter/issues"
+  },
+  "homepage": "https://github.com/tuvistavie/revealjs-starter#readme",
+  "devDependencies": {
+    "connect": "^3.4.1",
+    "connect-livereload": "^0.5.4",
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-stylus": "^2.3.0",
+    "serve-static": "^1.10.2"
+  }
+}
