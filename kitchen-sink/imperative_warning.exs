@@ -6,7 +6,7 @@ defmodule Imperative do
     String.duplicate(str, n)
   end
 
-  def imperative_assignent(str, n, opts) do
+  def functional_dupicate(str, n, opts \\ []) do
     n = double_if_true(n, opts[:double])
     String.duplicate(str, n)
   end

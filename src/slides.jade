@@ -1,54 +1,142 @@
 section
-  h1 Daniel Perez
-  h3
-    | CTO @ 
-    a(href="http://claudetech.com" target="_blank") ClaudeTech
-  h3
-    i.fa.fa-github.fa-margin
-    a(href="https://github.com/tuvistavie" target="_blank") tuvistavie
-  h3
-    a(href="http://tuvistavie.com/tokyo.ex" target="_blank") http://tuvistavie.com/tokyo.ex
+  section
+    h1 Daniel Perez
+    h3
+      | CTO @
+      a(href="http://claudetech.com" target="_blank") ClaudeTech
+    h3
+      i.fa.fa-github.fa-margin
+      a(href="https://github.com/tuvistavie" target="_blank") tuvistavie
+    h3
+      a(href="http://tuvistavie.com/tokyo.ex" target="_blank") http://tuvistavie.com/tokyo.ex
+
+  section
+    h2 Elixir experience
+    ul
+      li Using in production for ~3 months
+      li
+        | Helping to maintain
+        a(href="https://github.com/HashNuke/hound")  Hound (browser automation library)
+      li Loosely trying to help a little in the core
+      li Released a few libraries
 
 section
-  h3 Elixir
-  ul
-    li Using in production for ~3 months
-    li
-      | Maintaining 
-      a(href="https://github.com/HashNuke/hound") Hound (browser automation library)
-    li Loosely trying to help a little in the core
+  section
+    h2 Today's topic
+    h3 What's new in Elixir 1.3
 
-section
-  h3 Elixir 1.3
-  ul
-    li Deprecation of imperative assignment
-    li <code>with</code> improvements
-    li Date datatypes  
-    li Plenty of other stuff
+    br
+    .fragment(data-fragment-index="2")
+      h4 Target audience
+      ul
+        li Familiar with Elixir
+        li More or less aware of 1.2 features
 
-section
-  h3 How to try it
-  h4 Normal Install
-  pre: code(lang="shell")
-    | git clone https://github.com/elixir-lang/elixir.git
-    | cd elixir
-    | make
-    | ./bin/iex
+  section
+    h3 Elixir 1.3
+    ul
+      li Deprecation of imperative assignment
+      li <code>with</code> improvements
+      li Date datatypes
+      li Plenty of other stuff
 
-  h4 With <a href="https://github.com/taylor/kiex">kiex</a>
-  
-  pre: code(lang="shell")
-    | kiex install master
-    | source $HOME/.kiex/elixirs/elixir-master.env
-    | iex
+  section
+    h3 How to try it
+    h4 Normal Install
+    pre: code.shell
+      | git clone https://github.com/elixir-lang/elixir.git
+      | cd elixir
+      | make
+      | ./bin/iex
+
+    h4 With <a href="https://github.com/taylor/kiex">kiex</a>
+
+    pre: code.shell
+      | kiex install master
+      | source $HOME/.kiex/elixirs/elixir-master.env
+      | iex
+
 section
   section
     h3 Deprecation of imperative assignments
-    p This code will now give a warning
-    pre: code(lang="elixir")
-      include ./snippets/imperative_assignement.exs
-    p we can refactor
-    pre: code(lang="elixir")
-      include ./snippets/functional_assignement.exs
+    p
+      | From 1.2, conditional variable declaration
+      | has been deprecated.
+    pre: code.elixir
+      include ./snippets/conditional_declaration.exs
+    p should be written as
+    pre: code.elixir
+      include ./snippets/functional_declaration.exs
+  
   section
-    h3 A helper each time??
+    h3 Deprecation of imperative assignments
+    p From 1.3 this code will also give a warning
+    pre: code.elixir
+      include ./snippets/imperative_assignement.exs
+    .fragment(data-fragment-index="2")
+      p we can refactor
+      pre: code.elixir
+        include ./snippets/functional_assignement.exs
+
+  section
+    h3 But why?
+    p Compare
+    pre: code.elixir
+      | x = 1
+      | with :ok <- :ok do
+      |   x = 2
+      | end
+      | IO.puts(x) # 1
+    .fragment(data-fragment-index="2")
+      p and
+      pre: code.elixir
+        | x = 1
+        | case :ok do
+        |   :ok -> x = 2
+        | end
+        | IO.puts(x) # 2
+
+  section
+    h3 Towards new scoping rules (Elixir 2.0)
+    h4 Scope will be consistent
+    pre: code.elixir
+      | x = 1
+      | case :ok do
+      |   :ok -> x = 2
+      | end
+      | IO.puts(x) # 1
+    p
+      | Same goes for <code>receive</code>, <code>cond</code>, and
+      | constructs derived, such as <code>if</code>
+
+  section
+    h3 What does this gives us?
+    ul
+      li Pros
+        ul
+          li Consistency
+          li Code easier to understand
+          li Code easier to refactor
+      li Cons
+        ul
+          li Code sometimes a little verbose
+
+section
+  section
+    h3 <code>with</code> improvements
+    p The new special form <code>with</code> has been introduced in 1.2
+    .fragment(data-fragment-index="1")
+      pre: code.elixir
+        include ./snippets/nested_case.exs
+    .fragment(data-fragment-index="2")
+      p becomes
+      pre: code.elixir
+        include ./snippets/nested_case_with.exs
+  section
+    h3 <code>with</code> improvements
+    p Improvements in 1.3
+    ul
+      li Addition of an <code>else</code> clause
+      li Possibility to use guards
+  section
+    h3 Addition of an <code>else</code> clause

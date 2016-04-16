@@ -5,7 +5,7 @@
 * `with` improvements
   * Possibility to use guards
   * Possibility to use `else`
-* Date datatypes  
+* Date datatypes
 * Addition of escript installation related tasks
 * ExUnit diff improvements
 * Addition of Make compiler
