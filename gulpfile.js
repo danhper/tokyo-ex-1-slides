@@ -20,7 +20,7 @@ gulp.task('jade', function () {
 
 gulp.task('stylus', function () {
   return gulp.src('./src/css/main.styl')
-    .pipe(stylus())
+    .pipe(stylus({compress: !dev}))
     .pipe(gulp.dest('./build/css'))
     .pipe(livereload())
 })
