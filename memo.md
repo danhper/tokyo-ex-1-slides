@@ -9,9 +9,9 @@
 * Addition of escript installation related tasks
 * ExUnit diff improvements
 * Addition of Make compiler
-* Support OTP `optionalcallback`, `optionalmacrocallback`
 * Changes in `defdelegate`
   * deprecation of list
   * support of optional arguments
 * Addition of `Process.sleep`
+* Support OTP `optionalcallback`, `optionalmacrocallback`
 * Mix tasks (app.tree, deps.tree)

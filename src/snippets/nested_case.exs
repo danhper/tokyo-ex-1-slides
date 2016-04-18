@@ -1,4 +1,4 @@
-case HTTPoison.get("http://example.com/some.json") do
+case HTTPoison.get(url) do
   {:ok, %HTTPoison{body: body}} ->
     case Poison.decode(body) do
       {:ok, data} ->

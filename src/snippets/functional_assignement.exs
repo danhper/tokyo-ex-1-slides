@@ -1,4 +1,4 @@
-def imperative_duplicate(str, n, opts \\ []) do
+def functional_duplicate(str, n, opts \\ []) do
   n = double_if_true(n, opts[:double])
   String.duplicate(str, n)
 end

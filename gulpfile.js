@@ -25,7 +25,14 @@ gulp.task('stylus', function () {
     .pipe(livereload())
 })
 
+gulp.task('copy:images', function(arg) {
+  return gulp.src('./src/images/*')
+    .pipe(gulp.dest('./build/images'))
+    .pipe(livereload())
+})
+
 gulp.task('watch', function(arg) {
+  gulp.watch('./src/images/*', ['copy:images'])
   gulp.watch('./src/**/*.jade', ['jade'])
   gulp.watch('./src/snippets/*', ['jade'])
   gulp.watch('./src/css/**/*.styl', ['stylus'])
@@ -43,6 +50,6 @@ gulp.task('connect', function () {
   })
 })
 
-gulp.task('build', ['jade', 'stylus'])
+gulp.task('build', ['jade', 'stylus', 'copy:images'])
 gulp.task('dev', ['build', 'watch', 'connect', 'livereload'])
 gulp.task('default', ['dev'])

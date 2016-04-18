@@ -17,7 +17,7 @@ section
       li
         | Helping to maintain
         a(href="https://github.com/HashNuke/hound")  Hound (browser automation library)
-      li Loosely trying to help a little in the core
+      li Loosely helping in the core
       li Released a few libraries
 
 section
@@ -30,7 +30,7 @@ section
       h4 Target audience
       ul
         li Familiar with Elixir
-        li More or less aware of 1.2 features
+        li.fragment(data-fragment-index="3") More or less aware of 1.2 features
 
   section
     h3 Elixir 1.3
@@ -64,10 +64,11 @@ section
       | has been deprecated.
     pre: code.elixir
       include ./snippets/conditional_declaration.exs
-    p should be written as
-    pre: code.elixir
-      include ./snippets/functional_declaration.exs
-  
+    .fragment(data-fragment-index="2")
+      p should be written as
+      pre: code.elixir
+        include ./snippets/functional_declaration.exs
+
   section
     h3 Deprecation of imperative assignments
     p From 1.3 this code will also give a warning
@@ -95,10 +96,15 @@ section
         |   :ok -> x = 2
         | end
         | IO.puts(x) # 2
+    .fragment(data-fragment-index="3")
+      p
+        | <code>case</code>, <code>cond</code>, <code>receive</code> scope leaks
+        br
+        | <code>try</code>, <code>with</code>, <code>for</code> scope do not
 
   section
     h3 Towards new scoping rules (Elixir 2.0)
-    h4 Scope will be consistent
+    p Scope will be consistent, no leaking
     pre: code.elixir
       | x = 1
       | case :ok do
@@ -140,3 +146,182 @@ section
       li Possibility to use guards
   section
     h3 Addition of an <code>else</code> clause
+    p We want to rewrite
+    pre: code.elixir
+      include ./snippets/nested_case_2.exs
+  section(data-transition="fade-in slide-out")
+    h3 Addition of an <code>else</code> clause
+    p Without <code>with</code> <code>else</code> clause
+    pre: code.elixir
+      include ./snippets/nested_case_2_with_no_else.exs
+  section(data-transition="fade-in slide-out")
+    h3 Addition of an <code>else</code> clause
+    p With <code>with</code> <code>else</code> clause
+    pre: code.elixir
+      include ./snippets/nested_case_2_with_else.exs
+
+  section
+    h3 Support for guards in <code>with</code>
+    p We can rewrite
+    pre: code.elixir
+      include ./snippets/case_guard.exs
+    .fragment(data-fragment-index="1")
+      p into
+      pre: code.elixir
+        include ./snippets/with_guard.exs
+
+section
+  section
+    h3 Date datatypes
+
+    p Before Elixir 1.3, two main libraries for time/date
+
+    ul
+      li: a(href="https://github.com/lau/calendar") Calendar
+      li: a(href="https://github.com/bitwalker/timex") Timex
+
+    p Both are great, but not (easily) interoperable
+
+  section
+    h3 Date datatypes
+    p Elixir 1.3 introduces the following types
+
+    ul
+      li: code Calendar
+      li: code Date
+      li: code Time
+      li
+        code NaiveDateTime
+        |  (without timezone)
+      li
+        code DateTime
+        |  (with timezone)
+
+    p and will provide a ISO8601 compatible implementation
+
+section
+  h3 <code>escript</code> installation tasks
+  p <code>mix escript.build</code> produces a single easy to run binary
+  p In Elixir 1.3, tasks to manage <code>escript</code>s have been added
+  ul
+    li: code mix escript
+    li: code mix escript.install URL
+    li: code mix escript.uninstall NAME
+
+  .fragment(data-fragment-index="1")
+    p One liner in README
+    code mix escript.install https://example.com/my-escript
+
+section
+  section
+    h3 ExUnit pretty diff
+    p Before Elixir 1.3
+    img.small(src="images/ex_unit_diff_12.png")
+  section(data-transition="fade-in slide-out")
+    h3 ExUnit pretty diff
+    p From Elixir 1.3
+    img.small(src="images/ex_unit_diff_13.png")
+
+section
+  h3 Make compiler
+  p Before 1.3 it was <a href="https://github.com/elixircnx/comeonin/blob/master/mix.exs">a little complicated</a> to run make
+  p With Elixir 1.3, simply add <code>:make</code> to compilers
+  pre: code.elixir
+    | defmodule MyApp.Mixfile do
+    |   def project do
+    |     [app: my_app,
+    |      compilers: [:make] ++ Mix.compilers]
+    |   end
+    | end
+
+section
+  section
+    h3 Changes in <code>defdelegate</code>
+    p Before 1.3 we could write this
+    pre: code.elixir
+      | defdelegate [reverse(list), map(list, callback)], to: :lists, append_first: true
+    .fragment
+      p This is now deprecated:
+      pre: code
+        | warning: passing a list to Kernel.defdelegate/2 is deprecated,
+        |          please define each delegate separately
+        | warning: Kernel.defdelegate/2 :append_first option is deprecated
+  section
+    h3 Changes in <code>defdelegate</code>
+    p Before 1.3 we had to write
+    pre: code.elixir
+      | defdelegate start_session,            to: Hound.Helpers.Session
+      | defdelegate start_session(opts),      to: Hound.Helpers.Session
+    .fragment
+      p From 1.3, we can write
+      pre: code.elixir
+        | defdelegate start_session(opts \\ []), to: Hound.Helpers.Session
+
+section
+  section
+    h3 Addition of <code>Process.sleep</code>
+    p
+      | Before 1.3, we could achieve this with <code>:timer.sleep</code>
+      br
+      | Probably added mainly for documentation:
+      br
+      | <strong>we usually do not need it</strong>
+  section
+    h3 <code>Process.sleep</code> alternatives
+    h4 Bad
+    pre: code.elixir
+      | Task.async fn ->
+      |   do_something()
+      | end
+      | Process.sleep(30_000)
+    .fragment
+      h4 Good
+      pre: code.elixir
+        | parent = self()
+        | Task.async fn ->
+        |   do_something()
+        |   send parent, :work_done
+        | end
+        | receive do
+        |   :work_done -> :ok
+        | after
+        |   30_000 -> :timeout
+        | end
+  section
+    h3 <code>Process.sleep</code> alternatives
+    h4 Bad
+    pre: code.elixir
+      | Task.start_link fn ->
+      |   do_something()
+      | end
+      | # Wait until task terminates
+      | Process.sleep(30_000)
+    .fragment
+      h4 Good
+      pre: code.elixir
+        | {:ok, pid} = Task.start_link fn ->
+        |   do_something()
+        | end
+        | ref = Process.monitor(pid)
+        | receive do
+        |   {:DOWN, ^ref, _, _, _} -> :task_is_down
+        | after
+        |   30_000 -> :timeout
+        | end
+
+section
+  h3 <code>optionalcallback</code> and <code>optionalmacrocallback</code>
+  ul
+    li Possible to achieve something similar with <code>defoverridable</code>
+    li Added for better Erlang interoperability
+    li Still in discussion in <a href="https://github.com/elixir-lang/elixir/pull/4037">#4037</a>
+
+section
+  section
+    h3 <code>app.tree</code> and <code>deps.tree</code> mix tasks
+    pre: code
+      include ./snippets/deps_tree.sh
+  section
+    h3 <code>app.tree</code> and <code>deps.tree</code> mix tasks
+    pre: code
+      include ./snippets/app_tree.sh
