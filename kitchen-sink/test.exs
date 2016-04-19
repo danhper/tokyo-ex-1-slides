@@ -15,4 +15,3 @@ defmodule DummyTest do
     assert [0, 1, 2, 3, 4, 5] == [O, 1, 2, 3, 4, 5]
   end
 end
-

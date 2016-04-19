@@ -1,0 +1,2 @@
+defmodule Sample do
+end
