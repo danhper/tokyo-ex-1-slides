@@ -291,15 +291,16 @@ section
     h3 <code>Process.sleep</code> alternatives
     h4 Bad
     pre: code.elixir
-      | Task.start_link fn ->
+      | Task.start fn ->
       |   do_something()
       | end
       | # Wait until task terminates
       | Process.sleep(30_000)
+      | # Check if process is alive
     .fragment
       h4 Good
       pre: code.elixir
-        | {:ok, pid} = Task.start_link fn ->
+        | {:ok, pid} = Task.start fn ->
         |   do_something()
         | end
         | ref = Process.monitor(pid)
